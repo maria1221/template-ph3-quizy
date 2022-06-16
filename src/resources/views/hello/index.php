@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>HEllo/Index</title>
+  <title>Hello/Index</title>
   <style>
     body {font-size: 16pt; color:#999;}
     h1 {font-size: 100pt; text-align:right; color:#f6f6f6;
@@ -9,6 +9,7 @@
 </head>
   <body>
     <h1>Index</h1>
-    <p>This is a sample page with php-template.</p>
+    <p><?php echo $msg; ?></p>
+    <p><?php echo $id;?></p>
   </body>
 </html>
