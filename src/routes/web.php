@@ -18,9 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// 呼び出すコントローラー@アクション名
-// Route::get('hello', 'HelloController@index');
-// Route::get('hello/{id?}/{pass?}', 'HelloController@index');
-// Route::get('hello', 'HelloController@index');
-// Route::get('hello/other', 'HelloController@other');
-Route::get('hello', 'HelloController');
+// 第二引数でviewメソッドを使用
+// view（'フォルダ名.ファイル名')  引数にテンプレート名をテキストで指定→そのテンプレートを読み込んで返す
+// →テンプレートのソースコードをそのまま返すわけではない
+Route::get('hello', function() {
+    return view('hello.index');
+});
+
