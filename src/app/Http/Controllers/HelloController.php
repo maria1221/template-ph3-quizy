@@ -7,11 +7,17 @@ use Illuminate\Http\Response;
 
 class HelloController extends Controller
 {
-    public function index(Request $request) { // 引数にrequestインスタンスを渡す
+    public function index() { // 引数にrequestインスタンスを渡す
         $data = [
-            'msg'=>'これはコントローラから渡されたメッセージです。',
-            //テンプレートに渡すidの値は$request->idとして取り出す。このidがクエリー文字 
-            'id'=>$request->id
+            'msg'=>'お名前入力してください。',
+        ];
+        return view('hello.index', $data);
+    }
+    public function post(Request $request)
+    {
+        $msg = $request->msg; //フォームの内容をこのように取りだす→フォームで送信された値は全てnameのプロパティとして取り出せるようになっている
+        $data = [
+            'msg'=>'こんにちは、' . $msg .'さん',
         ];
         return view('hello.index', $data);
     }
