@@ -22,5 +22,5 @@ Route::get('/', function () {
 // view（'フォルダ名.ファイル名')  引数にテンプレート名をテキストで指定→そのテンプレートを読み込んで返す
 // →テンプレートのソースコードをそのまま返すわけではない
 // Route::get('hello', 'HelloController@index');
-Route::get('hello/{id?}', 'HelloController@index');
+Route::get('hello', 'HelloController@index');
 

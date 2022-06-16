@@ -7,11 +7,11 @@ use Illuminate\Http\Response;
 
 class HelloController extends Controller
 {
-    public function index($id = 'zero') {
+    public function index(Request $request) { // 引数にrequestインスタンスを渡す
         $data = [
             'msg'=>'これはコントローラから渡されたメッセージです。',
-        // return view(テンプレート, 配列) indexアクションのviewメソッドを呼び出すところで、必要な値をテンプレート側にわたす
-        'id'=>$id
+            //テンプレートに渡すidの値は$request->idとして取り出す。このidがクエリー文字 
+            'id'=>$request->id
         ];
         return view('hello.index', $data);
     }
