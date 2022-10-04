@@ -20,7 +20,8 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
+    protected $maxAttempts = 5;     // ログイン試行回数（回）
+    protected $decayMinutes = 3;   // ログインロックタイム（分）
     /**
      * Where to redirect users after login.
      *
@@ -37,4 +38,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    
 }

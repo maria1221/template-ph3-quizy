@@ -11,8 +11,19 @@
 |
 */
 
+
+// ログイン
+Route::get('quiz/auth', 'QuizController@getAuth');
+Route::post('quiz/auth', 'QuizController@postAuth');
+
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('quiz', 'QuizController@index');
 Route::get('quiz/{id}', 'QuizController@quiz')->name('quiz');
+// セッション
+Route::get('quiz/session', 'QuizController@ses_get');
+Route::get('quiz/session', 'QuizController@ses_put');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
