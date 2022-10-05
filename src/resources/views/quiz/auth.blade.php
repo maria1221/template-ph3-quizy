@@ -1,3 +1,11 @@
+
+<html>
+  <head>
+    <title>クイズ</title>
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/quiz.css') }}">
+  </head>
+  <body>
 <p>{{$message}}</p>
 <form action="/quiz/auth" method="post">
 <table>
@@ -7,3 +15,5 @@
   <tr><th></th><td><input type="submit" value="send"></td></tr>
 </table>
 </form>
+</body>
+</html>

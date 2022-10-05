@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+
 class QuizController extends Controller
 {
     public function index() {
     return view('quiz.index');
+    }
+    // 問題のタイトル一覧
+    public function quizTitles()
+    {
+        $quiz_titles = DB::select('select * from choices where answer = true');
+        return view('quiz.admin', ['quiz_titles' => $quiz_titles]);
     }
 
     public function quiz($id) {
@@ -45,10 +52,11 @@ class QuizController extends Controller
         if (Auth::attempt(['user_id' => $user_id, 'password' => $password])) {
             $msg = 'ログインしました。(' . Auth::user()->name . ')';
             // リダイレクタのintendedメソッドは、認証フィルターで引っかかる前にアクセスしようとしていたURLへ、ユーザーをリダイレクト
-            return redirect()->intended('quiz.quiz');
+            return redirect()->intended('quiz');
         } else {
             $msg = 'ログインに失敗しました。';
-        }
         return view('quiz.auth', ['message' => $msg]);
+        }
     }
+
 }
