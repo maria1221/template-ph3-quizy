@@ -12,12 +12,17 @@ class QuizController extends Controller
     public function index() {
     return view('quiz.index');
     }
-    // 問題のタイトル一覧
-    public function quizTitles()
+    // 問題のタイトル編集
+    public function quizzes()
     {
-        $quiz_titles = DB::select('select * from choices where answer = true');
-        return view('quiz.admin', ['quiz_titles' => $quiz_titles]);
+        $quizzes = DB::select('select * from quiz');
+        return view('quiz.admin', ['quizzes' => $quizzes]);
     }
+    // 問題のタイトル編集
+    // public function addTitle()
+    // {
+
+    // }
 
     public function quiz($id) {
         $param = ['id' => $id];
@@ -52,7 +57,8 @@ class QuizController extends Controller
         if (Auth::attempt(['user_id' => $user_id, 'password' => $password])) {
             $msg = 'ログインしました。(' . Auth::user()->name . ')';
             // リダイレクタのintendedメソッドは、認証フィルターで引っかかる前にアクセスしようとしていたURLへ、ユーザーをリダイレクト
-            return redirect()->intended('quiz');
+            // return redirect()->intended('quiz');
+            return redirect()->intended('quiz/admin');
         } else {
             $msg = 'ログインに失敗しました。';
         return view('quiz.auth', ['message' => $msg]);

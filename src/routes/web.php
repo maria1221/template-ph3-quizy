@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('quiz', 'QuizController@index');
-Route::get('quiz/admin', 'QuizController@quizTitles')->name('quizTitles');
+Route::get('quiz/admin', 'QuizController@quizzes')->name('quizzes');
 Route::get('quiz/{id}', 'QuizController@quiz')->name('quiz');
 // セッション
 Route::get('quiz/session', 'QuizController@ses_get');
