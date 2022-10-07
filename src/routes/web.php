@@ -12,9 +12,9 @@
 */
 
 
-// ログイン
-Route::get('quiz/auth', 'QuizController@getAuth');
-Route::post('quiz/auth', 'QuizController@postAuth');
+// // ログイン
+// Route::get('quiz/auth', 'QuizController@getAuth');
+// Route::post('quiz/auth', 'QuizController@postAuth');
 
 Route::get('/', function () {
     return view('welcome');

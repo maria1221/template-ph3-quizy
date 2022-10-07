@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -39,9 +39,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function authorize(Request $request) {
-        // プロキシサーバを経由した場合に、X-Forwarded-Forヘッダから接続元のクライアントIPを取得する設定
-        $request::setTrustedProxies($request->ip(), $request::getTrustedHeaderSet());
-    }
+    // public function authorize(Request $request) {
+    //     // プロキシサーバを経由した場合に、X-Forwarded-Forヘッダから接続元のクライアントIPを取得する設定
+    //     $request::setTrustedProxies($request->ip(), $request::getTrustedHeaderSet());
+    // }
     
 }

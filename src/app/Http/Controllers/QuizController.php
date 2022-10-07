@@ -44,25 +44,25 @@ class QuizController extends Controller
         return redirect('quiz.session');
     }
 
-    // ログイン
-    public function getAuth(Request $request)
-    {
-        $param=['message' => 'ログインしてください。'];
-        return view('quiz.auth', $param);
-    } 
-    public function postAuth(Request $request)
-    {
-        $user_id = $request->user_id;
-        $password = $request->password;
-        if (Auth::attempt(['user_id' => $user_id, 'password' => $password])) {
-            $msg = 'ログインしました。(' . Auth::user()->name . ')';
-            // リダイレクタのintendedメソッドは、認証フィルターで引っかかる前にアクセスしようとしていたURLへ、ユーザーをリダイレクト
-            // return redirect()->intended('quiz');
-            return redirect()->intended('quiz/admin');
-        } else {
-            $msg = 'ログインに失敗しました。';
-        return view('quiz.auth', ['message' => $msg]);
-        }
-    }
+    // // ログイン
+    // public function getAuth(Request $request)
+    // {
+    //     $param=['message' => 'ログインしてください。'];
+    //     return view('quiz.auth', $param);
+    // } 
+    // public function postAuth(Request $request)
+    // {
+    //     $user_id = $request->user_id;
+    //     $password = $request->password;
+    //     if (Auth::attempt(['user_id' => $user_id, 'password' => $password])) {
+    //         $msg = 'ログインしました。(' . Auth::user()->name . ')';
+    //         // リダイレクタのintendedメソッドは、認証フィルターで引っかかる前にアクセスしようとしていたURLへ、ユーザーをリダイレクト
+    //         // return redirect()->intended('quiz');
+    //         return redirect()->intended('quiz/admin');
+    //     } else {
+    //         $msg = 'ログインに失敗しました。';
+    //     return view('quiz.auth', ['message' => $msg]);
+    //     }
+    // }
 
 }
