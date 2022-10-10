@@ -4,21 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Choice extends Model
+class Quiz extends Model
 {
-    public function getData()
-    {
-        return '名前：'.$this -> name.'---メール：'.$this -> email; 
-    }
-        //Laravelのリレーション
+    //Laravelのリレーション
     // hasOne(1対1) 主テーブルのあるレコードに対して、獣テーブルの1つのレコードが紐づけられる
     // hasMany(1対多) 主テーブルのあるレコードに対して従テーブルの複数のレコードが紐づけられる
     // belongsTo 従テーブルの複数レコードに対して、主テーブルの1つのレコードが紐づけられる(従テーブルから関連する主テーブルのレコードを取り出す)
-    public function quiz()
+
+    public function choices()
     {
-        //Choiceテーブル(従テーブル)の選択肢たち(複数)に対して Quizテーブル(主テーブル)の県名を紐づける
-        return $this->belongsTo('App\Quiz');
+        // Quizテーブル(主テーブル)の県名に対して、Choiceテーブル(従テーブル)の複数レコードを紐づける
+        return $this->hasMany('App\Choice');
     }
-
-
 }
