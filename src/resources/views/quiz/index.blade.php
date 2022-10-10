@@ -9,9 +9,8 @@
   <link rel="stylesheet" href="{{ asset('css/quiz.css') }}">
 </head>
 <body>
-  <ul>
-    <li><a href=" {{ route('quiz', ['id' => 1])  }} ">ガチで東京の人しか解けない！＃東京の難読地名クイズ</a></li>
-    <li><a href="  {{ route('quiz', ['id' => 2])  }}  ">広島県民なら解けて当然？＃広島県の難読地名クイズ</a></li>
-  </ul>
+    @foreach($big_questions as $big_question)
+    <a href=" {{ route('quiz', ['id' => $big_question->id])  }} ">{{$big_question->id}}.{{$big_question->prefectures_name}}</a>
+    @endforeach
 </body>
 </html>

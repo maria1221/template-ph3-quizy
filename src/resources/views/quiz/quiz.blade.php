@@ -10,32 +10,28 @@
 </head>
 <body>
 
+
 <h1>ガチで
-@php  
-echo $title[$id - 1];
+@foreach($questions as $question)  
+@php
+print_r($question->prefectures_name);
 @endphp
+@endforeach
 の人しか解けない！＃
 @php
-echo $title[$id - 1];
+print_r($question->prefectures_name);
 @endphp
 の難読地名クイズ
 </h1>
-@foreach($choices as $index =>$choice)
+@foreach($questions as $index =>$question)
 <h2 class="underline"> 
   @php 
   echo $index+1  . ". この地名はなんて読む？"; 
   @endphp 
 </h2> 
-<img class="question_img" src="{{ asset('img/' . $id . '-' .  ($index+1)
+<img class="question_img" src="{{ asset('img/' . $question->prefectures_id . '-' .  ($index+1)
 .
 '.png') }}" alt="問いとなる地名の画像"/>
-@foreach($choice as $select)
-<li class='choice'>
-  @php
-  print_r($select);
-  @endphp
-</li>
-@endforeach
 @endforeach
 </ul>
 </body>

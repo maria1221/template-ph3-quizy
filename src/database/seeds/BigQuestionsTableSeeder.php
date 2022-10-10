@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\BigQuestion;
 
-class QuizTableSeeder extends Seeder
+class BigQuestionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,16 +13,15 @@ class QuizTableSeeder extends Seeder
      */
     public function run()
     {
-        // レコードを作成するための処理を用意
-        //  
+        //
         $param = [
             'prefectures_name' => '東京',
         ];
-        DB::table('quiz')->insert($param);
+        DB::table('big_questions')->insert($param);
 
         $param = [
             'prefectures_name' => '広島',
         ];
-        DB::table('quiz')->insert($param);
+        DB::table('big_questions')->insert($param);
     }
 }
