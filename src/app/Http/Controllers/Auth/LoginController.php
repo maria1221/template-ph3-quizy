@@ -30,7 +30,6 @@ class LoginController extends Controller
      * ログインロックタイム（分）
      */
     protected $decayMinutes = 3;
-
     /**
      * Where to redirect users after login.
      *
