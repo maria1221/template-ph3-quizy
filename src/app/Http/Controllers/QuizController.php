@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
 use App\BigQuestion;
 use App\Question;
@@ -27,6 +27,15 @@ class QuizController extends Controller
         // $choices = DB::select('select * from choices where prefectures_id = :id', $param);
         $choices = Choice::where('prefectures_id', $id)->get();
         return view('quiz.quiz', compact('big_questions', 'questions', 'choices'));
+    }
+    public function login(Request $request)
+    {
+        $user = Auth::user();
+        $sort = $request->sort;
+        $items=Person::orderBy($sort, 'asc')
+        ->simplePaginate(5);
+        $param=['items'=>$items, 'sort'=>$sort, 'user'=>$user];
+        return view('hello.index', $param);
     }
 
 }
