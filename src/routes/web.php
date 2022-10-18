@@ -12,12 +12,17 @@ use App\Http\Controllers\QuizController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::view('/', 'welcome');
 Route::get('quiz', 'QuizController@index');
 Route::get('/quiz/{id}', 'QuizController@quiz')->name('quiz');
-
+Route::get('admin', 'QuizController@admin');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// 問題タイトルの追加
+Route::get('/admin/big_question/add', 'QuizController@post');
+// Route::post('/admin/big/question/add', 'QuizController@quizAdd');
+Route::match(['get', 'post'], '/admin/big/question/add', 'QuizController@quizAdd');

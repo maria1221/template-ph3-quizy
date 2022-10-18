@@ -37,5 +37,25 @@ class QuizController extends Controller
         $param=['items'=>$items, 'sort'=>$sort, 'user'=>$user];
         return view('hello.index', $param);
     }
-
+    public function admin() {
+        $big_questions = BigQuestion::all();
+        return view('admin.admin', compact('big_questions'));
+    }
+// 問題の追加 fromの値を取得し$paramに代入
+ //アクションメソッドの追加
+    public function post(Request $request) {
+        return view('admin.big_question.add'); //viewsフォルダのpostファイルに$dataを渡しつつページ表示する
+    }   
+    public function quizAdd(Request $request) {
+        // $param = [
+        //     'title' => $request->title, //取得したいデータをinput要素のname属性
+        // ];
+        //DBに接続しデータを挿入する。第１パラメータにSQL文、第２に$paramを。
+        // DB::insert('insert into big_questions (prefectures_name, created_at) values (:title, NOW())', $param);
+        BigQuestion::create([
+            'prefectures_name' => $request->title
+        ]);
+        return view('admin.admin');
+    }
 }
+

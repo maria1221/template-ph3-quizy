@@ -14,11 +14,11 @@
       @php
         print_r($big_question->prefectures_name);
       @endphp
+      の人しか解けない！＃
+      @php
+        // print_r($big_question->prefectures_name);
+      @endphp
     @endforeach
-    の人しか解けない！＃
-    @php
-      print_r($big_question->prefectures_name);
-    @endphp
     の難読地名クイズ
   </h1>
   @foreach($questions as $index =>$question)

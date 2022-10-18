@@ -16,6 +16,11 @@
 
                     You are logged in!
                 </div>
+                <div>
+                    <a href="/admin">admin画面</a>
+                    <a href="/quiz">クイズ一覧</a>
+                    
+                </div>
             </div>
         </div>
     </div>
