@@ -10,9 +10,11 @@
 </head>
 <body>
   <div>
-    <p>問題タイトルの追加</p>
-    <form action="/admin/big_question/add" method="POST" enctype="multipart/form-data">
+    <h1>問題タイトルの追加</h1>
+    <form method="POST" action="/admin/big_question/add"  enctype="multipart/form-data">
       @csrf
+      @method('POST') 
+      {{-- The POST method is not supported for this route. Supported methods: GET, HEAD. --}}
       <label for="title">問題タイトル</label>
       <input type="text" name="title" id="title">
       <input type="submit" value="追加">
