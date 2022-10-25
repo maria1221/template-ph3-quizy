@@ -79,6 +79,32 @@ class QuizController extends Controller
         return redirect('admin');
     }
 
-// https://snome.jp/framework/laravel-user-edit2/
+    // https://snome.jp/framework/laravel-user-edit2/
+    // https://implist.dev/entries/0223f2a77cc411c99699585d42eee900
+
+
+    // 問題のタイトルの削除
+    public function move_delete(Request $request, $id) {
+        $id = $request->route()->parameter('id');
+        $big_question = BigQuestion::find($id);
+        return view('admin.big_question.delete.id', compact('big_question'));
+    }
+    public function delete(Request $request)
+    {
+        BigQuestion::find($request->id)
+        ->delete();
+        return redirect('admin');
+    }
+
+    // 問題のタイトルの並び替え
+    public function sort() { 
+        //並び順、orderの昇順,登録日の降順
+        $big_questions = BigQuestion::all();
+        return view('admin.big_question.sort', compact('big_questions'));
+    }
+
+
+
 }
+
 
