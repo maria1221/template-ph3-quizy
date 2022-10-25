@@ -15,8 +15,11 @@
       @csrf
       @method('PUT') 
       {{-- <input type="hidden" name="prefecture_id" value="{{$big_question->id}}"> --}}
+      <p>
+        {{$big_question}}
+      </p>
       <label for="update_title">問題タイトルの変更</label>
-      {{-- <input  id="update_title" type="text" name="prefecture_name" value="{{ $big_question->prefecture_name}}"> --}}
+      <input  id="update_title" type="text" name="prefecture_name" value="{{ $big_question->prefecture_name}}">
       <input type="submit" value="変更">
     </form>
   </div>
