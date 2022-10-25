@@ -26,4 +26,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/big_question/add', 'QuizController@post');
 Route::post('/admin/big_question/add', 'QuizController@quizAdd');
 Route::get('/admin/big_question/edit/{id}', 'QuizController@update');
-Route::put('/admin/big_question/edit/{id}', 'QuizController@edit');
+Route::put('/admin/big_question/edit', 'QuizController@edit');

@@ -66,17 +66,17 @@ class QuizController extends Controller
     // 問題のタイトルの変更
     public function update(Request $request, $id) {
         $id = $request->route()->parameter('id');
-        $big_question = BigQuestion::where('id', $id)->get();
+        $big_question = BigQuestion::find($id);
         return view('admin.big_question.edit.id', compact('big_question'));
     }
     public function edit(Request $request)
     {
-        $big_question = BigQuestion::find($request->id);
-        $big_question -> update(
+        BigQuestion::find($request->id)
+        -> update(
             [
-            'prefectures_name' => $request->prefecture_name,
+            'prefectures_name' => $request->prefecture_name
         ]);
-        return redirect('admin/admin');
+        return redirect('admin');
     }
 
 // https://snome.jp/framework/laravel-user-edit2/

@@ -10,16 +10,12 @@
 </head>
 <body>
   <div>
-    {{-- <h2>{{$big_question->prefectures_name}}</h2> --}}
-    <form method="POST" action="/admin/big_question\edit">
+    <form method="POST" action="/admin/big_question/edit">
       @csrf
       @method('PUT') 
-      {{-- <input type="hidden" name="prefecture_id" value="{{$big_question->id}}"> --}}
-      <p>
-        {{$big_question}}
-      </p>
       <label for="update_title">問題タイトルの変更</label>
-      <input  id="update_title" type="text" name="prefecture_name" value="{{ $big_question->prefecture_name}}">
+      <input type="hidden" name="id"  value="{{ $big_question->id }}">      {{-- どの問題タイトルを更新するべきなのかを判断 --}}
+      <input  id="update_title" type="text" name="prefecture_name" value="{{ $big_question->prefectures_name}}">
       <input type="submit" value="変更">
     </form>
   </div>
