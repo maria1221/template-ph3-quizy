@@ -16,12 +16,16 @@ class QuestionsTableSeeder extends Seeder
         $params = [
             [
                 'prefectures_id' => 1,
+                'image' => 'takanawa.png'
             ],
             [
                 'prefectures_id' => 1,
+                'image' => 'kameido.png'
+
             ],
             [
                 'prefectures_id' => 2,
+                'image' => 'mukainada.png'
             ],
         ];
         foreach ($params as $param) {

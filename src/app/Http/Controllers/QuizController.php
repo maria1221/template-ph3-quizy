@@ -132,9 +132,57 @@ class QuizController extends Controller
     }
 
     // 設問のメンテナンス
-    public function question_edit(Request $request, $id) {
+    public function question_maintenance(Request $request, $id) {
         $id = $request->route()->parameter('id');
         $big_question = BigQuestion::find($id);
-        return view('admin.question.edit.id', compact('big_question'));
+        $questions = Question::where('prefectures_id', $id)->get();       
+        $choices = Choice::where('prefectures_id', $id)->where('answer', 1)->get();
+        $question_id = Question::latest('id')->first(['id']);
+        return view('admin.question.edit.id', compact('big_question', 'questions', 'choices', 'question_id'));
     }
+    // 設問の画像を設定
+    public function question_edit(Request $request) {
+         // ディレクトリ名
+        $dir = 'img';  
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+        // 取得したファイル名で保存
+        $request->file('image')->storeAs('public/' . $dir, $file_name);
+        Question::find($request->question_id)
+        -> update(
+            [
+            'image' => $file_name
+            ]);
+        Choice::where('question_id', $request->question_id)
+        ->where('answer', 1)
+        ->update(
+            [
+                'choice' => $request->question_name
+            ]);
+        return redirect('admin');
+    }
+    // 設問の追加
+    public function question_add(Request $request){
+         // ディレクトリ名
+        $dir = 'img';  
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+        // 取得したファイル名で保存
+        $request->file('image')->storeAs('public/' . $dir, $file_name); 
+        // $choice_count = Choice::selectRaw('count(distinct question_id)')->get();  
+        // $question_id = $choice_count + 1;     
+        Question::create([
+            'prefectures_id'=>$request->big_question_id,
+            'image'=>$file_name,
+        ]);
+        $question_id = $request->question_id + 1;
+        Choice::create([
+            'choice' => $request->question_name,
+            'prefectures_id'=>$request->big_question_id,
+            'question_id' =>$question_id,
+            'answer' => 1,
+        ]);
+        return redirect('admin');
+    }
+
 }

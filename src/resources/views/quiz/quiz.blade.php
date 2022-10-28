@@ -22,9 +22,7 @@
     <h2 class="underline"> 
         {{$index+1  . ". この地名はなんて読む？"}}
     </h2> 
-    <img class="question_img" src="{{ asset('img/' . $question->prefectures_id . '-' .  ($index+1)
-    .
-    '.png') }}" alt="問いとなる地名の画像"/>
+    <img class="question_img" src="{{ asset('img/' . $question->image) }}" alt="問いとなる地名の画像"/>
     <ul>
       {{-- choicesテーブルのquestion_idが問題のidと同じであればいい
         →問題のid=questionsテーブルのid --}}

@@ -17,6 +17,7 @@ class QuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('prefectures_id');
+            $table->string('image');
             $table->timestamps();
         });
     }

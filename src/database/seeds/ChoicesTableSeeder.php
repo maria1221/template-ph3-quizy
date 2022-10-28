@@ -57,45 +57,24 @@ class ChoicesTableSeeder extends Seeder
         ];
         DB::table('choices')->insert($param);
         $param = [
-            'choice' => 'かゆまち',
-            'prefectures_id' => '1',
-            'answer' => '0',
-            'question_id' => '3',
-        ];
-        DB::table('choices')->insert($param);
-        $param = [
-            'choice' => 'おかとまち',
-            'prefectures_id' => '1',
-            'answer' => '0',
-            'question_id' => '3',
-        ];
-        DB::table('choices')->insert($param);
-        $param = [
-            'choice' => 'こうじまち',
-            'prefectures_id' => '1',
-            'answer' => '1',
-            'question_id' => '3',
-        ];
-        DB::table('choices')->insert($param);
-        $param = [
             'choice' => 'むきひら',
             'prefectures_id' => '2',
             'answer' => '0',
-            'question_id' => '1',
+            'question_id' => '3',
         ];
         DB::table('choices')->insert($param);
         $param = [
             'choice' => 'むこうひら',
             'prefectures_id' => '2',
             'answer' => '0',
-            'question_id' => '1',
+            'question_id' => '3',
         ];
         DB::table('choices')->insert($param);
         $param = [
             'choice' => 'むかいなだ',
             'prefectures_id' => '2',
             'answer' => '1',
-            'question_id' => '1',
+            'question_id' => '3',
         ];
         DB::table('choices')->insert($param);
     }
