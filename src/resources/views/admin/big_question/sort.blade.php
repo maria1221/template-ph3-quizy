@@ -9,37 +9,37 @@
   <link rel="stylesheet" href="{{ asset('css/quiz.css') }}">
 </head>
 <body>
-<!-- jQuery -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
-
-<!-- jQuery UI -->
-<script
-  src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"
-  integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k="
-  crossorigin="anonymous"></script>
-  <script>
-    $(function(){
-      $('#sortable').sortable();
-      $('#sortable').bind("sortstop", function(){
-        $(this).find('[name="display_order"]').each(function(idx){
-          $(this).val(idx + 1);
-        })
-      })
-    });
-  </script>
-  
-  <div id="sortable">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    
+<form action="/admin/big_question/sort_by" method="post">
+  @csrf
+  @method('post')
+  <ul id="sortable">
     @foreach($big_questions as $big_question)
-    <div>
-      <input type="hidden" name="display_order" value="{{$big_question->prefectures_name}}">
-      {{$big_question->prefectures_name}}
-    </div>
+      <li id="{{$big_question -> id}}">
+        {{ $big_question->prefectures_name }}
+      </li>
     @endforeach
-  </div>
-  
+  </ul>
+  <input type="hidden" id="result" name="result" />
+  <input type="submit" id="submit" value="並び順を保存する" />
+</form>
+
+<script>
+  $(function() {
+    // ソート可能にする
+    $("#sortable").sortable();
+    $("#sortable").disableSelection();
+    $("#submit").click(function() {
+      // result に並び順を格納する
+      var result = $("#sortable").sortable("toArray");
+      $("#result").val(result);
+      $("form").submit();
+    });
+  });
+  </script>
 
 </body>
 </html>
+

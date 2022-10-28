@@ -16,6 +16,7 @@ class CreateBigQuestionsTable extends Migration
         Schema::create('big_questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('prefectures_name');
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@
 </head>
 <body>
     @foreach($big_questions as $big_question)
-    <a href=" {{ route('quiz', ['id' => $big_question->id])  }} ">{{$big_question->id}}.{{$big_question->prefectures_name}}</a>
+    <a href=" {{ route('quiz', ['id' => $big_question->id])  }} ">{{$big_question->prefectures_name}}</a>
     @endforeach
 </body>
 </html>
