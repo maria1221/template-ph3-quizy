@@ -13,14 +13,11 @@
     <a href="/admin/big_question/add">問題タイトルの追加</a>
     <a href="/admin/big_question/sort">問題タイトルの順序の変更</a>
     @foreach($big_questions as $big_question)
-      <p>{{$big_question->prefectures_name}}</p>
-        {{-- <a href="/admin/big_question/update">問題タイトルの変更</a> --}}
-        {{-- route()メソッドの第二引数でモデルデータを指定→自動的にルーティングに沿った形でデータのidがURLにうめこまれる --}}
-        {{-- <a href="{{ route('big_question.update', ['id' => $big_question->id]) }}">問題タイトルの変更</p> --}}
-        {{-- <a href="{{ route('admin.big_question.edit', ['id' => $big_question->id]) }}">問題タイトルの変更</a> --}}
-        {{-- <a href="admin/big_question/edit/{['id' => $big_question->id]}">問題タイトルの変更</a> --}}
+      <div>
+        <a href="/admin/question/edit/{{$big_question->id}}">{{ $big_question->prefectures_name }}</a>
         <a href="admin/big_question/edit/{{ $big_question->id }}">問題タイトルの変更</a>
-        <a href="/admin/big_question/delete/{{$big_question->id}}">問題の削除</a>
+        <a href="/admin/big_question/delete/{{$big_question->id}}">問題の削除</a>  
+      </div>
     @endforeach
   </div>
 </body>

@@ -130,11 +130,11 @@ class QuizController extends Controller
     BigQuestion::orderBy('order', 'asc')->get();
     return redirect('admin');
     }
+
+    // 設問のメンテナンス
+    public function question_edit(Request $request, $id) {
+        $id = $request->route()->parameter('id');
+        $big_question = BigQuestion::find($id);
+        return view('admin.question.edit.id', compact('big_question'));
+    }
 }
-
-
-// 龍一君
-// 悩んでて、さいころ振って偶数がでたからやろうかな
-// 
-
-// カラムを一個増やす。order。表示する時に、idじゃなくてorderの順番で表示

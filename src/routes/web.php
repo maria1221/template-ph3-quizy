@@ -34,5 +34,7 @@ Route::delete('/admin/big_question/delete', 'QuizController@delete');
 // 問題のタイトルの並び替え
 Route::get('/admin/big_question/sort', 'QuizController@sort');
 Route::post('/admin/big_question/sort_by', 'QuizController@sort_by');
+// 設問のメンテナンス
+Route::get('/admin/question/edit/{id}', 'QuizController@question_edit');
 
 // フロントで昇順降順を変えられるか？→今postされた準。じゃなくって、高輪、亀戸の順じゃなくて、亀戸高輪の順にできる。
