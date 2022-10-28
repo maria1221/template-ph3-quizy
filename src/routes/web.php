@@ -39,5 +39,7 @@ Route::get('/admin/question/edit/{id}', 'QuizController@question_maintenance');
 Route::post('/admin/question/edit', 'QuizController@question_edit');
 // 設問の追加
 Route::post('/admin/question/add', 'QuizController@question_add');
+// 設問の削除
+Route::post('/admin/question/delete', 'QuizController@question_delete');
 
 // フロントで昇順降順を変えられるか？→今postされた準。じゃなくって、高輪、亀戸の順じゃなくて、亀戸高輪の順にできる。

@@ -23,10 +23,16 @@
           <input type="hidden" name="question_id" value="{{$question->id}}">
           <input type="submit" value="設問を変更する">
         </form>
+        <form action="/admin/question/delete" method="post">
+          @csrf
+          <input type="hidden" name="question_id" value="{{$question->id}}">
+          <input type="submit" value="削除する">
+        </form>
         <img class="question_img" src="{{ asset('img/' . $question->image) }}" alt="問いとなる地名の画像"/>
       @endforeach
     </ul>
   @endforeach
+
   <h1>設問の追加</h1>
   <form action="/admin/question/add" method="post"enctype="multipart/form-data" enctype="multipart/form-data">
     @csrf

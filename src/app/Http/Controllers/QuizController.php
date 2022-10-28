@@ -184,5 +184,42 @@ class QuizController extends Controller
         ]);
         return redirect('admin');
     }
+    // 設問の削除
+    public function question_delete(Request $request) {
+        Question::where('id', $request->question_id)
+        ->delete();
+        Choice::where('question_id', $request->question_id)
+        ->delete();
+        return redirect('admin');
+    }
+
+    // 設問の並び替え 
+    public function question_sort(){
+        //並び順、orderの昇順,登録日の降順
+        // $big_questions = BigQuestion::all();
+        $questions = BigQuestion::orderBy('order', 'asc')->get();
+
+        return view('admin.question.sort', compact('questions'));
+    }
+
+    // 並び順が POST に格納されている場合は、並び順を変える
+    public function question_sort_by(Request $request) {
+        $result = $request->result;
+        if ($result != NULL) {
+  // データの id が「,」区切りで順番に格納されているデータを配列に変換する
+            $ids = explode(",", $result);
+        for ($i = 1; $i < count($ids); $i++) {
+            $id = $ids[$i] + 0;
+            BigQuestion::where('id', $id)
+            ->update(['order'=> $i]);
+            // $sql =  "UPDATE big_questions SET sort='{$i}' WHERE id='{$id}'";
+            // mysql_query($sql);
+        }
+    }
+    // ソート順にデータを取得する
+    // BigQuestion::select('SELECT * FROM big_questions ORDER BY order');
+    BigQuestion::orderBy('order', 'asc')->get();
+    return redirect('admin');
+    }
 
 }
