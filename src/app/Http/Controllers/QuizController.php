@@ -226,6 +226,14 @@ class QuizController extends Controller
     return redirect('admin');
     }
 
+    // 設問のメンテナンス画面
+    public function select(Request $request, $id) {
+        $id = $request->route()->parameter('id');
+        $questions = Question::orderBy('sort', 'asc')->where('prefectures_id', $id)->get();
+        $choices = Choice::all();
+        return view('admin.question.select.id', compact('id', 'questions', 'choices'));
+    }
+
 
     
 }

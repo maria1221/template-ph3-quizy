@@ -14,7 +14,7 @@
   @foreach($questions as $index => $question)
     <ul>
       @foreach($choices->where('question_id', $question->id) as $choice) 
-        <li>{{$choice->choice}}</li>
+        <a href="/admin/question/select/{{$question->id}}"">{{$choice->choice}}</a>
         <form action="/admin/question/edit" method="post" enctype="multipart/form-data">
           @csrf
           <label for="question_name">設問を変更</label>
