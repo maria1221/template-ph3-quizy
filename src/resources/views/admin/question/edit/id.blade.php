@@ -10,6 +10,7 @@
 </head>
 <body>
   <h1>{{$big_question->prefectures_name}}の登録済みの設問</h1>
+  <a href="/admin/question/sort/{{$big_question->id}}">説問の並び替え</a>
   @foreach($questions as $index => $question)
     <ul>
       @foreach($choices->where('question_id', $question->id) as $choice) 

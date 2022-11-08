@@ -9,37 +9,31 @@
   <link rel="stylesheet" href="{{ asset('css/quiz.css') }}">
 </head>
 <body>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    
-<form action="/admin/big_question/sort_by" method="post">
-  @csrf
-  @method('post')
-  <ul id="sortable">
-    @foreach($big_questions as $big_question)
-      <li id="{{$big_question -> id}}">
-        {{ $big_question->prefectures_name }}
-      </li>
-    @endforeach
-  </ul>
-  <input type="hidden" id="result" name="result" />
-  <input type="submit" id="submit" value="並び順を保存する" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <form action="/admin/big_question/sort_by" method="post">
+    @csrf
+    @method('post')
+  <ul class="sortable">
+     @foreach($big_questions as $big_question)
+      <li id="{{$big_question->id}}">{{$big_question->prefectures_name}}</li>
+     @endforeach
+   </ul>
+  <input type="hidden" id="list-ids" name="list_ids" />
+  <button id="submit">更新</button>
 </form>
 
 <script>
   $(function() {
-    // ソート可能にする
-    $("#sortable").sortable();
-    $("#sortable").disableSelection();
-    $("#submit").click(function() {
-      // result に並び順を格納する
-      var result = $("#sortable").sortable("toArray");
-      $("#result").val(result);
-      $("form").submit();
-    });
+      $(".sortable").sortable();
+      $(".sortable").disableSelection();
+      $("#submit").click(function() {
+          var listIds = $(".sortable").sortable("toArray");
+          $("#list-ids").val(listIds);
+          $("form").submit();
+      });
   });
-  </script>
-
+</script>
 </body>
 </html>
 

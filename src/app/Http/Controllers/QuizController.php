@@ -113,18 +113,18 @@ class QuizController extends Controller
 
     // 並び順が POST に格納されている場合は、並び順を変える
     public function sort_by(Request $request) {
-        $result = $request->result;
+        $result = $request->list_ids;
         if ($result != NULL) {
   // データの id が「,」区切りで順番に格納されているデータを配列に変換する
             $ids = explode(",", $result);
-        for ($i = 1; $i < count($ids); $i++) {
+        for ($i = 0; $i < count($ids); $i++) {
             $id = $ids[$i] + 0;
             BigQuestion::where('id', $id)
             ->update(['order'=> $i]);
             // $sql =  "UPDATE big_questions SET sort='{$i}' WHERE id='{$id}'";
             // mysql_query($sql);
+            }
         }
-    }
     // ソート順にデータを取得する
     // BigQuestion::select('SELECT * FROM big_questions ORDER BY order');
     BigQuestion::orderBy('order', 'asc')->get();
@@ -194,12 +194,14 @@ class QuizController extends Controller
     }
 
     // 設問の並び替え 
-    public function question_sort(){
+    public function question_sort(Request $request, $id) {
+        $id = $request->route()->parameter('id');
+        $choices = Choice::where('prefectures_id', $id)->where('answer', 1)->get();
         //並び順、orderの昇順,登録日の降順
         // $big_questions = BigQuestion::all();
-        $questions = BigQuestion::orderBy('order', 'asc')->get();
+        $questions = Question::where('prefectures_id', $id)->orderBy('order', 'asc')->get();
 
-        return view('admin.question.sort', compact('questions'));
+        return view('admin.question.sort', compact('questions', 'choices'));
     }
 
     // 並び順が POST に格納されている場合は、並び順を変える
@@ -210,7 +212,7 @@ class QuizController extends Controller
             $ids = explode(",", $result);
         for ($i = 1; $i < count($ids); $i++) {
             $id = $ids[$i] + 0;
-            BigQuestion::where('id', $id)
+            Question::where('prefectures_id', $id)
             ->update(['order'=> $i]);
             // $sql =  "UPDATE big_questions SET sort='{$i}' WHERE id='{$id}'";
             // mysql_query($sql);

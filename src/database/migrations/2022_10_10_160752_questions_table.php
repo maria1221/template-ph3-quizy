@@ -18,6 +18,7 @@ class QuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('prefectures_id');
             $table->string('image');
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }
