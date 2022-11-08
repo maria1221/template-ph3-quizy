@@ -15,6 +15,7 @@ class CreateChoicesTable extends Migration
     {
         Schema::create('choices', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('sort')->nullable();
             $table->string('choice');
             $table->integer('prefectures_id');
             $table->integer('question_id');

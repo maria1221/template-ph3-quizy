@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Choice extends Model
 {
-    protected $fillable = ['choice', 'answer', 'prefectures_id', 'question_id']; 
+    protected $fillable = ['choice', 'answer', 'prefectures_id', 'question_id', 'sort']; 
 
     public function getData()
     {

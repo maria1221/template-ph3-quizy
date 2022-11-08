@@ -26,7 +26,7 @@ class QuizController extends Controller
         // $items = DB::select('select * from quiz where id = :id', $param);
         $big_questions = BigQuestion::where('id', $id)->get();
         // $big_questions = BigQuestion::where('order', $id)->get();
-        $questions = Question::where('prefectures_id', $id)->get();
+        $questions = Question::orderBy('sort', 'asc')->where('prefectures_id', $id)->get();
 
         // $choices = DB::select('select * from choices where prefectures_id = :id', $param);
         $choices = Choice::where('prefectures_id', $id)->get();
@@ -135,8 +135,8 @@ class QuizController extends Controller
     public function question_maintenance(Request $request, $id) {
         $id = $request->route()->parameter('id');
         $big_question = BigQuestion::find($id);
-        $questions = Question::where('prefectures_id', $id)->get();       
-        $choices = Choice::where('prefectures_id', $id)->where('answer', 1)->get();
+        $questions = Question::orderBy('sort', 'asc')->where('prefectures_id', $id)->get();       
+        $choices = Choice::orderBy('sort', 'asc')->where('prefectures_id', $id)->where('answer', 1)->get();
         $question_id = Question::latest('id')->first(['id']);
         return view('admin.question.edit.id', compact('big_question', 'questions', 'choices', 'question_id'));
     }
@@ -196,32 +196,36 @@ class QuizController extends Controller
     // 設問の並び替え 
     public function question_sort(Request $request, $id) {
         $id = $request->route()->parameter('id');
-        $choices = Choice::where('prefectures_id', $id)->where('answer', 1)->get();
         //並び順、orderの昇順,登録日の降順
         // $big_questions = BigQuestion::all();
-        $questions = Question::where('prefectures_id', $id)->orderBy('order', 'asc')->get();
+        $choices = Choice::orderBy('sort', 'asc')->where('prefectures_id', $id)->where('answer', 1)->get();
+        $questions=Question::orderBy('sort', 'asc')->where('prefectures_id', $id)->get();
 
-        return view('admin.question.sort', compact('questions', 'choices'));
+        return view('admin.question.sort', compact('choices', 'questions'));
     }
 
     // 並び順が POST に格納されている場合は、並び順を変える
     public function question_sort_by(Request $request) {
-        $result = $request->result;
+        $result = $request->list_ids;
         if ($result != NULL) {
   // データの id が「,」区切りで順番に格納されているデータを配列に変換する
             $ids = explode(",", $result);
-        for ($i = 1; $i < count($ids); $i++) {
+        for ($i = 0; $i < count($ids); $i++) {
             $id = $ids[$i] + 0;
-            Question::where('prefectures_id', $id)
-            ->update(['order'=> $i]);
+            Choice::where('question_id', $id)
+            ->update(['sort'=> $i]);
+            Question::where('id', $id)
+            ->update(['sort'=> $i]);
+
             // $sql =  "UPDATE big_questions SET sort='{$i}' WHERE id='{$id}'";
             // mysql_query($sql);
         }
     }
     // ソート順にデータを取得する
     // BigQuestion::select('SELECT * FROM big_questions ORDER BY order');
-    BigQuestion::orderBy('order', 'asc')->get();
     return redirect('admin');
     }
 
+
+    
 }

@@ -18,11 +18,11 @@
   <ul id="sortable">
     @foreach($questions as $index => $question)
       @foreach($choices->where('question_id', $question->id) as $choice) 
-        <li id="{{$choice->question_id}}"</li>{{$choice->choice}}</li>
+        <li id="{{$choice->question_id}}"</li>{{$choice->choice}}{{$choice->sort}}</li>
       @endforeach
     @endforeach
   </ul>
-  <input type="hidden" id="result" name="result" />
+  <input type="hidden" id="result" name="list_ids" />
   <input type="submit" id="submit" value="並び順を保存する" />
 </form>
 <script>
