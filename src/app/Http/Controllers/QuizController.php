@@ -234,6 +234,21 @@ class QuizController extends Controller
         return view('admin.question.select.id', compact('id', 'questions', 'choices'));
     }
 
-
+    public function select_edit(Request $request) {
+        Choice::where('id' ,$request->select_id)
+        -> update(
+            [
+            'choice' => $request->select_name,
+            'answer' => $request->answer,
+        ]);
+        // $id = $request->route()->parameter('id');
+        // $questions = Question::orderBy('sort', 'asc')->where('prefectures_id', $id)->get();
+        // $choices = Choice::all();
+        // return redirect('admin.question.select.id', compact('id', 'questions', 'choices'));
+        // $id = $request->route()->parameter('id');
+        // $questions = Question::orderBy('sort', 'asc')->where('prefectures_id', $id)->get();
+        // $choices = Choice::all();
+        return redirect('admin');
+    }
     
 }

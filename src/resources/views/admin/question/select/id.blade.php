@@ -10,10 +10,17 @@
 </head>
 <body>
   <h1>選択肢のメンテナンス</h1>
-    <ul>
-      @foreach($choices->where('question_id', $id) as $choice) 
-        <li>{{$choice->choice}}</li>
+      @foreach($choices->where('question_id', $id) as $choice)
+      <form action="/admin/question/select/edit" method="post" enctype="multipart/form-data">
+          @csrf
+          <input type="text" name="select_name" id="select_name" value="{{$choice->choice}}">
+          <select name="answer" id="answer">
+            <option value="1">正解</option>
+            <option value="0">不正解</option>  
+          </select>
+          <input type="hidden" name="select_id" value="{{$choice->id}}">
+          <input type="submit" value="変更する">
+        </form>
       @endforeach
-    </ul>
 </body>
 </html>
