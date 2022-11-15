@@ -54,6 +54,10 @@
   display: none;
 }
 
+.display {
+  display: block;
+}
+
 .answerText{
   font-weight: bold; 
   border-bottom: 3px solid dodgerblue;

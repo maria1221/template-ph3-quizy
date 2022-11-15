@@ -37,6 +37,9 @@
       <p class="answer_text"></p>
     </div>
   </div>
+  @php
+  $correct = $choices->where('answer', 1);
+  @endphp 
   @endforeach
 
 <script>
@@ -58,27 +61,36 @@ allQuiz.forEach(quiz => {
   const answerBox = quiz.querySelectorAll('.answer_box');
   const answerTitle = quiz.querySelectorAll('.answer_title');
   const answerText = quiz.querySelectorAll('.answer_text');
-
+  // Nodelistだからforeachを使える
   answers.forEach(answer=> {
     answer.addEventListener('click', () => {
-      
+
       // 全てのボタンを非活性化
       setDisabled(answers);
-
-      // Number()を使わないと、ifが使えない
+      // answerboxを表示
+      console.log(answerText[0]);
+      answerBox[0].classList.remove('hidden');
+            // Number()を使わないと、ifが使えない
       const selectedAnswerNumber = Number(answer.getAttribute('data-answer'));
       // setDisabled(answer);
       if(selectedAnswerNumber === 1) {
         answer.classList.add('correct');
+        answerTitle[0].innerText = "正解！";
+        answerText[0].innerText = "正解は" ;
       } else {
         answer.classList.add('incorrect');
-      }
+        answerTitle[0].innerText = "不正解"
+        answerText[0].innerText = "正解は" ;
+
+      };
     })
   })
+  
+  
+});
 // Number」オブジェクト→値が数値であるかを検証したり文字列を数値に変換するなど
 // Number( 値 )  数値に変換したい値を引数に指定
 
-});
 
 // let choices = document.getElementsByClassName('choice');
 // HTMLCollection→配列ではないので、foreachが使えない
