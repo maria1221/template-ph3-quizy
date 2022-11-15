@@ -41,13 +41,17 @@
     color: white;
 }
 
-.answerBox {
+.answer_box {
   background-color: #EEEEEE; 
   margin-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px; 
   padding-top: 20px;
   height: 100px;
+}
+
+.hidden{
+  display: none;
 }
 
 .answerText{

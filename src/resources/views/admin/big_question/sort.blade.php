@@ -15,10 +15,10 @@
     @csrf
     @method('post')
   <ul class="sortable">
-     @foreach($big_questions as $big_question)
+    @foreach($big_questions as $big_question)
       <li id="{{$big_question->id}}">{{$big_question->prefectures_name}}</li>
-     @endforeach
-   </ul>
+    @endforeach
+  </ul>
   <input type="hidden" id="list-ids" name="list_ids" />
   <button id="submit">更新</button>
 </form>

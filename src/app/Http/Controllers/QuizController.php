@@ -105,12 +105,9 @@ class QuizController extends Controller
     // 問題のタイトルの並び替え
     public function sort() { 
         //並び順、orderの昇順,登録日の降順
-        // $big_questions = BigQuestion::all();
         $big_questions = BigQuestion::orderBy('order', 'asc')->get();
-
         return view('admin.big_question.sort', compact('big_questions'));
     }
-
     // 並び順が POST に格納されている場合は、並び順を変える
     public function sort_by(Request $request) {
         $result = $request->list_ids;
@@ -121,12 +118,10 @@ class QuizController extends Controller
             $id = $ids[$i] + 0;
             BigQuestion::where('id', $id)
             ->update(['order'=> $i]);
-            // $sql =  "UPDATE big_questions SET sort='{$i}' WHERE id='{$id}'";
-            // mysql_query($sql);
+
             }
         }
     // ソート順にデータを取得する
-    // BigQuestion::select('SELECT * FROM big_questions ORDER BY order');
     BigQuestion::orderBy('order', 'asc')->get();
     return redirect('admin');
     }
