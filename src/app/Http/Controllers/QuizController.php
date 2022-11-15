@@ -23,6 +23,10 @@ class QuizController extends Controller
     // クイズの画面を表示
     public function quiz(Request $request, $id) {
         $id = $request->route()->parameter('id');
+        $correct_choices = Choice::where([
+            ['prefectures_id', '=', $id],
+            ['answer', '=', 1],
+        ])->get();
         // $items = DB::select('select * from quiz where id = :id', $param);
         $big_questions = BigQuestion::where('id', $id)->get();
         // $big_questions = BigQuestion::where('order', $id)->get();
@@ -30,7 +34,7 @@ class QuizController extends Controller
 
         // $choices = DB::select('select * from choices where prefectures_id = :id', $param);
         $choices = Choice::where('prefectures_id', $id)->get();
-        return view('quiz.quiz', compact('big_questions', 'questions', 'choices'));
+        return view('quiz.quiz', compact('big_questions', 'questions', 'choices', 'correct_choices'));
     }
     // ログイン
     public function login(Request $request)

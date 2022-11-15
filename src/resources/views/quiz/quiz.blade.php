@@ -24,12 +24,17 @@
     </h2> 
     <img class="question_img" src="{{ asset('img/' . $question->image) }}" alt="問いとなる地名の画像"/>
     <ul>
+      @foreach ($correct_choices->where('question_id', $question->id) as $correct_choice)
+        @php
+        $correct_choice= $correct_choice->choice;
+        @endphp
       {{-- choicesテーブルのquestion_idが問題のidと同じであればいい
         →問題のid=questionsテーブルのid --}}
-      @foreach($choices->where('question_id', $question->id) as $index =>$choice) 
-        <button class="choice" data-answer="{{$choice->answer}}">
-          {{$choice->choice}}/{{$choice->answer}}
-        </button>
+        @foreach($choices->where('question_id', $question->id) as $index =>$choice) 
+          <button class="choice" data-answer="{{$choice->answer}}" data-correct ="{{$correct_choice}}">
+            {{$choice->choice}}
+          </button>
+        @endforeach
       @endforeach
     </ul>
     <div id="answerBox" class="answer_box hidden">
@@ -37,12 +42,11 @@
       <p class="answer_text"></p>
     </div>
   </div>
-  @php
-  $correct = $choices->where('answer', 1);
-  @endphp 
+
   @endforeach
 
 <script>
+
 // 問題全て
 let allQuiz =  document.querySelectorAll('.question');
 // 選択肢のbuttonタグにdisabledを付与
@@ -54,6 +58,7 @@ const setDisabled = answers => {
   }
 
 allQuiz.forEach(quiz => {
+  let correctChoices = @json($correct_choice);
   // 選択肢全て
   const answers = quiz.querySelectorAll('.choice');
   const selectedQuiz = Number(quiz.getAttribute('data-quiz'));
@@ -63,26 +68,31 @@ allQuiz.forEach(quiz => {
   const answerText = quiz.querySelectorAll('.answer_text');
   // Nodelistだからforeachを使える
   answers.forEach(answer=> {
+    const correctChoice = answer.getAttribute('data-correct');
     answer.addEventListener('click', () => {
 
       // 全てのボタンを非活性化
       setDisabled(answers);
       // answerboxを表示
-      console.log(answerText[0]);
+      // console.log(answerText[0]);
       answerBox[0].classList.remove('hidden');
             // Number()を使わないと、ifが使えない
       const selectedAnswerNumber = Number(answer.getAttribute('data-answer'));
+      const correctAnswer = answer.getAttribute('data-correct'); 
+      console.log(correctAnswer);
       // setDisabled(answer);
       if(selectedAnswerNumber === 1) {
         answer.classList.add('correct');
-        answerTitle[0].innerText = "正解！";
-        answerText[0].innerText = "正解は" ;
+        answerTitle[0].innerText = '正解！';
       } else {
         answer.classList.add('incorrect');
         answerTitle[0].innerText = "不正解"
-        answerText[0].innerText = "正解は" ;
+        // answerText[0].innerText = "正解は" ;
 
       };
+      // answerText[0].innerText = "正解は" . correctChoices;
+      answerText[0].innerText = `正解は${correctChoice}`;
+
     })
   })
   
