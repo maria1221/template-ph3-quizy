@@ -27,9 +27,9 @@
       {{-- choicesテーブルのquestion_idが問題のidと同じであればいい
         →問題のid=questionsテーブルのid --}}
       @foreach($choices->where('question_id', $question->id) as $index =>$choice) 
-        <li class="choice" data-answer="{{$choice->answer}}">
+        <button class="choice" data-answer="{{$choice->answer}}">
           {{$choice->choice}}/{{$choice->answer}}
-        </li>
+        </button>
       @endforeach
     </ul>
     <div id="answerBox" class="answer_box hidden">
@@ -42,7 +42,13 @@
 <script>
 // 問題全て
 let allQuiz =  document.querySelectorAll('.question');
-
+// 選択肢のbuttonタグにdisabledを付与
+// disabledは「使用禁止」
+const setDisabled = answers => {
+    answers.forEach(answer => {
+      answer.disabled = true;
+    })
+  }
 
 allQuiz.forEach(quiz => {
   // 選択肢全て
@@ -55,9 +61,13 @@ allQuiz.forEach(quiz => {
 
   answers.forEach(answer=> {
     answer.addEventListener('click', () => {
+      
+      // 全てのボタンを非活性化
+      setDisabled(answers);
+
       // Number()を使わないと、ifが使えない
       const selectedAnswerNumber = Number(answer.getAttribute('data-answer'));
-      console.log(selectedAnswerNumber);
+      // setDisabled(answer);
       if(selectedAnswerNumber === 1) {
         answer.classList.add('correct');
       } else {
